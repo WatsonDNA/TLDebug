@@ -1,0 +1,24 @@
+%
+% tldebug.sty
+%
+
+%%%% package declaration
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tldebug}[2016/07/07 dev]
+\def\tldb@pkgname{tldebug}
+
+%%%% error messages
+\def\tldb@warn{\PackageWarningNoLine\tldb@pkgname}
+\def\tldb@error{\PackageError\tldb@pkgname}
+
+%%%% prepare output file (*.dbg)
+\newwrite\@dbgfile
+\immediate\openout\@dbgfile=\jobname.dbg
+
+%%%% define print commands
+\def\print#1{\immediate\write\@dbgfile{#1}}
+\def\pmeaning#1{\print{\noexpand#1= \meaning#1}}
+\def\pswitch#1{\print{\noexpand#1= #1true\else false\fi}}
+\def\pcount#1{\print{\noexpand#1= \the#1}}
+
+%% EOF
